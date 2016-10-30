@@ -1,7 +1,7 @@
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-//connect to the database password removeds
+//connect to the database
 mongoose.connect('mongodb://test:test@ds019766.mlab.com:19766/todo');
 
 //Create schema - blueprint for data
@@ -26,7 +26,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 //var data = [{item: 'get milk'}, {item: 'walk dog'}, {item: 'kick some coding ass'}];
 
 module.exports = function(app){
-  app.get('/todo', function(req, res){
+  app.get('/', function(req, res){
     //get data from mongodb and pass it to the view
     //find finds specific objects in a collection and returns it
     Todo.find({}, function(err, data) {//empty objects means get all
@@ -35,7 +35,7 @@ module.exports = function(app){
     });
   });
 
-  app.post('/todo', urlencodedParser, function(req, res){
+  app.post('/', urlencodedParser, function(req, res){
     //get data from the view and add it to mongodb
     var newTodo = Todo(req.body).save(function(err, data){
       if(err) throw err;
@@ -43,7 +43,7 @@ module.exports = function(app){
     });
   });
 
-  app.delete('/todo/:item', function(req, res){
+  app.delete('/:item', function(req, res){
     //delete the requested item from the database
     Todo.find({item: req.params.item.replace(/\-/g, " ")}).remove(function(err, data){
       if(err)throw err;
