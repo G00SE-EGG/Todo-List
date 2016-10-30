@@ -2,7 +2,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 //connect to the database password removeds
-mongoose.connect('mongodb://test:test@ds139277.mlab.com:39277/heroku_8002f23z');
+mongoose.connect('mongodb://test:test@ds019766.mlab.com:19766/todo');
 
 //Create schema - blueprint for data
 var todoSchema = new mongoose.Schema({
